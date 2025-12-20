@@ -82,3 +82,8 @@
 .createBtn:hover {
     transform: scale(1.07);
 }
+
+.error {
+    display: none;
+    margin-top: 5px;
+}
