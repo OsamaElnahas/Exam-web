@@ -7,25 +7,218 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="exam.css">
+    <link rel="stylesheet" href="../fontawesome-free-7.1.0-web/css/all.css">
+
 
 </head>
 
 <body>
-    <div class="toast bg-green-200 text-green-700 font-bold w-[300px] py-3 px-4 rounded-md text-center border border-green-700" id="toastCard">Welcome Back !</div>
-    <div class="header w-[100%] px-6 py-4 md:py-8 md:px-14 ">
+    <div class="toast bg-green-200 text-green-700 font-bold w-[300px] py-3 px-4 rounded-md text-center border border-green-700 shadow-lg" id="toastCard"></div>
+    <div class="header  gap-4 w-[100%] px-6 py-3 md:py-3 md:px-14 flex items-center flex-wrap shadow-md  sticky top-0 z-50 fade-in">
 
-        <div class="title flex items-center  justify-start gap-4">
+        <div class="title flex items-center  justify-start gap-3">
 
-            <div class="logo flex justify-center  mb-4 bg-white shadow-lg w-[60px] h-[60px] p-2  md:w-[70px] md:h-[70px] md:p-4 items-center rounded-full mx-auto fade-in-out border-2 border-gray-200 flex-shrink-0">
+            <div class="logo flex justify-center   bg-white shadow-lg w-[50px] h-[50px] p-2  md:w-[60px] md:h-[60px] md:p-2 items-center rounded-full mx-auto fade-in-out border-2 border-gray-200 flex-shrink-0">
                 <img src="../assets/ChatGPT_Image_Dec_19_2025_11_31_23_PM.png" class="w-[100%]" alt="ExamWeb Logo" />
             </div>
 
-            <div class="text-md md:text-xl font-bold w-[100%]">Dashboard</div>
+            <div class="text-md md:text-xl font-bold w-[100%] fade-in">Programming Exam</div>
+        </div>
+        <div class="right-side  lg:mt-0  ml-auto flex  items-center gap-6  flex-wrap justify-between  w-[100%] md:w-auto mt-4 md:mt-0  fade-in">
+
+
+            <div class=" flex-1  px-2 md:px-3 py-2 flex flex-col gap-2 rounded-xl opacity-90 border-pulse min-w-[180px] max-w-[180px]  md:min-w-[200px] md:max-w-[280px]   lg:min-w-[280px] lg:max-w-[280px]" id="indicator-container">
+                <div class="time flex items-center gap-2">
+                    <div class="icon text-white font-bold  "> <i class="far fa-clock text-2xl"></i>
+                    </div>
+                    <div class="title text-gray-200 text-sm">Time Remaining</div>
+
+                </div>
+                <div id="indicator">
+                    <span class="text-center timer  font-bold   ">
+                        44:30 min
+                     </span>
+                </div>
+
+
+            </div>
+
+            <div class="user-name text-sm md:text-md font-medium ">Student
+                <div id="userNameDisplay" class="font-bold text-lg">
+                </div>
+            </div>
+
         </div>
 
 
 
+    </div>
 
+
+    <!-- Progress Bar -->
+
+
+    <div class="container mx-auto px-6 py-6">
+
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+            <!-- Question Navigator Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-md p-6 sticky top-24">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Question Navigator</h3>
+
+                    <!-- Legend -->
+                    <div class="space-y-2 mb-4 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded bg-green-500"></div>
+                            <span class="text-gray-600">Answered</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded bg-gray-300"></div>
+                            <span class="text-gray-600">Not Answered</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded bg-blue-500"></div>
+                            <span class="text-gray-600">Current</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded bg-amber-500"></div>
+                            <span class="text-gray-600">Marked for Review</span>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Question Grid -->
+                    <div class="grid grid-cols-5 gap-2" id="question-grid">
+                        <!-- Questions will be dynamically generated -->
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Summary -->
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Answered:</span>
+                            <span class="font-semibold text-green-600" id="answered-count">8</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Not Answered:</span>
+                            <span class="font-semibold text-gray-600" id="not-answered-count">17</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Marked:</span>
+                            <span class="font-semibold text-amber-600" id="marked-count">2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Question Area -->
+            <div class="lg:col-span-2">
+
+                <div class="bg-white rounded-xl shadow-md p-8 pt-2 ">
+                    <div class="flex items-center justify-between mb-3">
+                        <p class="text-sm text-[var(--primary-color)] ">Progress: <span class="font-semibold" id="progress-text">8/25</span></p>
+                        <p class="text-sm text-[var(--primary-color)]"><span class="font-semibold" id="progress-percent">32%</span> Complete</p>
+                    </div>
+                    <div class="w-full bg-[var(--primary-color)] bg-opacity-20 rounded-full h-2 my-3">
+                        <div class="bg-[var(--secondary-color)] h-2 rounded-full transition-all duration-300" id="progress-bar" style="width: 32%"></div>
+                    </div>
+                    <!-- Question Header -->
+                    <div class="flex items-center justify-between mb-5">
+                        <!-- <h2 class="text-xl font-bold text-[var(--secondary-color)]">Question <span id="current-question">5</span> of 25</h2> -->
+                        <button class="flex items-center space-x-2 text-amber-600 hover:text-amber-700 font-medium ml-auto" id="mark-review">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                            </svg>
+                            <span class="text-sm">Mark for Review</span>
+                        </button>
+                    </div>
+                    <hr class="my-3">
+
+
+                    <!-- Question Text -->
+                    <div class="m-5">
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            Solve for x in the equation: <span class="font-mono bg-gray-100 px-3 py-1 rounded">2x² + 5x - 3 = 0</span>
+                        </p>
+                    </div>
+
+                    <!-- Options -->
+                    <div class="space-y-2 mb-1">
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-3" data-option="A">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-700">
+                                    A
+                                </div>
+                                <p class="text-gray-700 font-medium">x = -3 or x = 0.5</p>
+                            </div>
+                        </div>
+
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-3 selected" data-option="B">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 rounded-full bg-[var(--primary-color)] flex items-center justify-center font-bold text-white">
+                                    B
+                                </div>
+                                <p class="text-gray-700 font-medium">x = 3 or x = -0.5</p>
+                            </div>
+                        </div>
+
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-3" data-option="C">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-700">
+                                    C
+                                </div>
+                                <p class="text-gray-700 font-medium">x = -2 or x = 1.5</p>
+                            </div>
+                        </div>
+
+                        <div class="option-card border-2 border-gray-200 rounded-lg p-3" data-option="D">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-700">
+                                    D
+                                </div>
+                                <p class="text-gray-700 font-medium">x = 2 or x = -1.5</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Action Buttons -->
+                    <div class="flex items-center justify-between pt-6 border-t-2 border-gray-100">
+
+                        <div class="flex space-x-3">
+                            <button class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition font-semibold flex items-center space-x-2" id="prev-btn">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                <span>Previous</span>
+                            </button>
+
+                            <button class="px-6 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:bg-[var(--third-color)] transition font-semibold flex items-center space-x-2" id="next-btn">
+                                <span>Next</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button (appears on last question or can be accessed) -->
+                    <div class="mt-6">
+                        <button class="w-full px-6 py-3 bg-[var(--primary-color)] text-white rounded-lg hover:bg-[var(--third-color)]  transition font-bold text-lg flex items-center justify-center space-x-2" id="submit-exam">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Submit Exam</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <script src="./exam.js"></script>
 

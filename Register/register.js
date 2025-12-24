@@ -99,7 +99,6 @@ registerForm.addEventListener('submit', function(e) {
 
 });
 
-
 if (localStorage.getItem('userData')) {
     window.location.replace("../Login/login.html");
 }
