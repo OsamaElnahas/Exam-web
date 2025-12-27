@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="result.css" />
+    <script
+      src="https://kit.fontawesome.com/408ec1c22a.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- nav start  -->
+    <div
+      class="toast bg-green-200 text-green-700 font-bold w-[300px] py-3 px-4 rounded-md text-center border border-green-700 shadow-lg"
+      id="toastCard"
+    ></div>
+    <div
+      class="header gap-4 w-[100%] px-6 py-3 md:py-3 md:px-14 flex items-center flex-wrap shadow-md sticky top-0 z-50 fade-in"
+    >
+      <div class="title flex items-center justify-start gap-3">
+        <div
+          class="logo flex justify-center bg-white shadow-lg w-[50px] h-[50px] p-2 md:w-[60px] md:h-[60px] md:p-2 items-center rounded-full mx-auto fade-in-out border-2 border-gray-200 flex-shrink-0"
+        >
+          <img
+            src="../assets/ChatGPT_Image_Dec_19_2025_11_31_23_PM.png"
+            class="w-[100%]"
+            alt="ExamWeb Logo"
+          />
+        </div>
+
+        <div class="text-md md:text-xl font-bold w-[100%] fade-in">
+          Programming Exam
+        </div>
+      </div>
+      <div
+        class="right-side lg:mt-0 ml-auto flex items-center gap-6 flex-wrap justify-between w-[100%] md:w-auto mt-4 md:mt-0 fade-in"
+      >
+        <div class="user-name text-sm md:text-md font-medium">
+          Student
+          <div id="userNameDisplay" class="font-bold text-lg"></div>
+        </div>
+
+        <!-- logout button  -->
+        <div>
+          <button
+            class="py-2 px-5 rounded-lg text-white font-semibold border border-gray-200 hover:bg-white transition delay-50 duration-300 ease-in-out hover:text-[--secondary-color] flex gap-2 items-center"
+          >
+            Logout
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- nav end  -->
+
+    <div class="container w-[85%] mx-auto py-8">
+      <div
+        class="flex justify-center items-center flex-col bg-white shadow-md rounded-xl py-12 px-8 gap-10"
+      >
+        <div
+          class="radial-progress flex flex-col justify-center items-center text-green-500 w-35 h-35"
+          style="--value: 70; --thickness: 10px"
+          aria-valuenow="70"
+          role="progressbar"
+        >
+          <p class="text-2xl font-bold text-black">70%</p>
+          <p class="text-gray-500">Your Score</p>
+        </div>
+
+        <div
+          class="flex py-2 px-4 md:px-5 justify-center items-center bg-green-200 text-green-800 font-bold rounded-3xl gap-4 text-[13px] md:text-[18px]"
+        >
+          <i class="fa-regular fa-circle-check text-[19px]"></i>
+          <p>Passed Excellent Performance</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5 md:grid-cols-4 w-full items-center">
+          <div
+            class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]"
+          >
+            <h3 class="text-[24px] font-bold correct-answer">22</h3>
+            <p class="font-semibold text-[18px]">Correct</p>
+          </div>
+          <div
+            class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]"
+          >
+            <h3 class="text-[24px] font-bold incorrect-answer">2</h3>
+            <p class="font-semibold text-[18px]">Incorrect</p>
+          </div>
+          <div
+            class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]"
+          >
+            <h3 class="text-[24px] font-bold skipped-answer">1</h3>
+            <p class="font-semibold text-[18px]">Skipped</p>
+          </div>
+          <div
+            class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]"
+          >
+            <h3 class="text-[24px] font-bold total-answers">25</h3>
+            <p class="font-semibold text-[18px]">Total</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="result.js"></script>
+</html>
