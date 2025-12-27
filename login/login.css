@@ -1,0 +1,120 @@
+:root {
+  --primary-color: #6e9195;
+  --secondary-color: #2d4f61;
+  --third-color: #496f74;
+  --text-color: #333333;
+  --background-color: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--third-color) 37%,
+    var(--secondary-color) 83%
+  );
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+* {
+  font-family: "Inter", sans-serif;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.input-focus:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.fade-in-out {
+  animation: fade-in-out 2s ease-in-out;
+}
+
+@keyframes fade-in-out {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-out-2 {
+  animation: fade-in-out-2 2s ease-in-out;
+}
+
+@keyframes fade-in-out-2 {
+  from {
+    opacity: 0;
+    transform: translateX(-150px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-60px);
+  }
+}
+
+.password-strength {
+  height: 4px;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.left-side h2 {
+  color: var(--third-color);
+}
+
+.right-side {
+  background: var(--background-color);
+}
+
+.createBtn {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--third-color) 37%,
+    var(--secondary-color) 83%
+  );
+  transition: all 0.3s ease;
+}
+
+.createBtn:hover {
+  transform: scale(1.07);
+}
