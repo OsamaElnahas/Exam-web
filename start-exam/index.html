@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/408ec1c22a.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>ExamX</title>
+  </head>
+
+  <body>
+    <!-- Outer wrapper to prevent scroll -->
+    <div
+      class="min-h-screen overflow-hidden bg-gradient-to-br from-[#6E9195] via-[#496f74] to-[#2d4f61]"
+    >
+      <div
+        class="flex flex-col justify-center items-center min-h-screen text-white gap-6 px-4 text-center fade-in"
+      >
+        <!-- Icon -->
+        <div class="p-1 overflow-hidden bg-white rounded-full w-[80px]">
+          <img
+            src="../assets/ChatGPT_Image_Dec_19_2025_11_31_23_PM.png"
+            alt=""
+            width="100%"
+          />
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-2xl sm:text-4xl font-bold">Welcome to ExamX</h1>
+
+        <p class="text-sm sm:text-base opacity-90">
+          Your gateway to online examinations.
+        </p>
+
+        <!-- Info Cards -->
+        <div class="flex justify-center flex-wrap gap-6 sm:gap-10 mt-4">
+          <!-- Card -->
+          <div
+            class="p-4 w-2/5 md:w-3/5 h-[100px] sm:w-[200px] md:h-[140px] bg-[#809a9f] flex flex-col justify-center gap-3 rounded-2xl shadow-md"
+          >
+            <h2 class="text-xl sm:text-2xl font-bold text-[#2d4f61]">Course</h2>
+            <p class="text-sm sm:text-lg font-semibold">Client Side</p>
+          </div>
+
+          <div
+            class="p-4 w-2/5 md:w-3/5 h-[100px] sm:w-[200px] md:h-[140px] bg-[#809a9f] flex flex-col justify-center gap-3 rounded-2xl shadow-md"
+          >
+            <h2 class="text-xl sm:text-2xl font-bold text-[#2d4f61]">
+              Duration
+            </h2>
+            <p class="text-sm sm:text-lg font-semibold">1 Hour</p>
+          </div>
+
+          <div
+            class="p-4 w-3/5 h-[100px] sm:w-[200px] md:h-[140px] bg-[#809a9f] flex flex-col justify-center gap-3 rounded-2xl shadow-md"
+          >
+            <h2 class="text-xl sm:text-2xl font-bold text-[#2d4f61]">
+              Questions
+            </h2>
+            <p class="text-sm sm:text-lg font-semibold">20 Questions</p>
+          </div>
+        </div>
+
+        <!-- Button -->
+        <button
+          id="start-exam"
+          class="mt-6 bg-white text-[#69878D] text-sm sm:text-lg py-3 px-10 sm:px-16 rounded-2xl flex items-center gap-4 hover:bg-gray-100 border-2 hover:border-gray-200"
+        >
+          <span id="btn-content" class="flex justify-center items-center gap-5">
+            Start Exam <i class="fa-solid fa-arrow-right"></i>
+          </span>
+          <span
+            id="loading-spinner"
+            class="loading loading-spinner loading-lg hidden"
+          ></span>
+        </button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
