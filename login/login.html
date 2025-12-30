@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="login.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../dist/output.css">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
@@ -76,10 +78,18 @@
 
                             <!-- Confirm Password Input -->
 
-                            <!-- Sign Up Button -->
-                            <button type="submit" id="loginBtn" class="createBtn w-full text-white py-3 rounded-lg font-bold text-lg hover:opacity-90 transition shadow-lg ">
-                  Sign in
+                            <button type="submit" id="loginBtn" class="createBtn w-full text-white py-3 rounded-lg font-bold text-lg hover:opacity-90 transition shadow-lg flex justify-center">
+                  <div id="btn-content">
+
+                      Sign in
+                </div>
+                    
+                     <span
+            id="loading-spinner"
+            class="loading loading-spinner loading-lg hidden"
+          ></span>
                 </button>
+                            <p class="text-center mt-1">You don't have an Account ? <a href="../Register/regeister.html" class="text-[--primary-color] font-bold">Register</a>
                         </div>
                     </form>
 

@@ -1,7 +1,7 @@
 var fNameRegex = /^[A-Za-z]{2,30}$/;
 var lNameRegex = /^[A-Za-z]{2,30}$/;
 var emailRegex = /^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.(com|net|org)$/;
-var PasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+var PasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$/;
 
 var fName = document.getElementById("fName");
 var lName = document.getElementById("lName");
@@ -17,7 +17,11 @@ var confirmPasswordErrMsg = document.getElementById('confirmPasswordErrMsg')
 
 var submitBtn = document.getElementById('submitBtn');
 
+
 var registerForm = document.querySelector('form');
+var btnContent = document.getElementById("btn-content")
+var loadingSpinner = document.getElementById("loading-spinner")
+
 
 
 
@@ -40,23 +44,23 @@ function validateField(input, regex, errorMsg, emptyMsg, invalidMsg) {
 }
 
 
-fName.addEventListener("blur", () => {
+fName.addEventListener("blur", function() {
     validateField(fName, fNameRegex, fNameErrMsg, "First Name is required", "First Name must be letters and (2–30 chars)");
 });
 
-lName.addEventListener("blur", () => {
+lName.addEventListener("blur", function() {
     validateField(lName, lNameRegex, lNameErrMsg, "Last Name is required", "Last Name must be letters and (2–30 chars)");
 });
-emailInput.addEventListener("blur", () => {
+emailInput.addEventListener("blur", function() {
     validateField(emailInput, emailRegex, emailErrMsg, "Email is required", "Please enter a valid email address");
 });
-passwordInput.addEventListener("blur", () => {
+passwordInput.addEventListener("blur", function() {
     validateField(passwordInput, PasswordRegex, passwordErrMsg, "Password is required", "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character");
 });
 
 var isValidConfirmPassword = false;
 
-confirmPasswordInput.addEventListener("blur", () => {
+confirmPasswordInput.addEventListener("blur", function() {
     if (confirmPasswordInput.value.trim() === "") {
         confirmPasswordErrMsg.textContent = "Confirm Password is required";
         confirmPasswordErrMsg.style.display = "block";
@@ -80,29 +84,53 @@ registerForm.addEventListener('submit', function(e) {
     var isEmailValid = validateField(emailInput, emailRegex, emailErrMsg, "Email is required", "Please enter a valid email address");
     var isPasswordValid = validateField(passwordInput, PasswordRegex, passwordErrMsg, "Password is required", "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character");
     if (isFnameValid && isLnameValid && isEmailValid && isPasswordValid && isValidConfirmPassword) {
-        console.log("Form submitted successfully!");
+
+
+        var users = JSON.parse(localStorage.getItem("users")) || [];
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === emailInput.value) {
+                emailErrMsg.textContent = "Email already exists";
+                emailErrMsg.style.display = "block";
+                return;
+            }
+        }
         var userData = {
+            id: Date.now(),
             firstName: fName.value,
             lastName: lName.value,
             email: emailInput.value,
-            password: passwordInput.value
+            password: passwordInput.value,
+            exam: {
+                questions: [],
+                submitted: false,
+                score: null,
+                remainingSeconds: null
+            }
         };
-        submitBtn.textContent = "Submitting...";
+
+
+
+
+        users.push(userData);
+
+        localStorage.setItem("users", JSON.stringify(users));
+
+        console.log("Form submitted successfully!");
+
+        btnContent.style.display = "none";
+        loadingSpinner.style.display = "block";
+
         submitBtn.disabled = true;
-        submitBtn.style.cursor = "not-allowed";
+
+        submitBtn.classList.add("disable");
         setTimeout(function() {
-            window.location.replace("../Login/login.html");
-        }, 2000);
-        localStorage.setItem('userData', JSON.stringify(userData));
+            window.location.replace("../login/login.html");
+        }, 1500);
+
+
+
         console.log(userData);
     }
 
 });
-
-if (localStorage.getItem('userData')) {
-    window.location.replace("../Login/login.html");
-}
-
-// lName.addEventListener("change", () => {
-//     validateField(lName, lNameRegex, lNameErrMsg, "Last Name is required", "Last Name must be letters and (2–30 chars)");
-// });

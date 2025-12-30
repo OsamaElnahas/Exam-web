@@ -101,3 +101,8 @@
     display: none;
     margin-top: 5px;
 }
+
+.disable {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
