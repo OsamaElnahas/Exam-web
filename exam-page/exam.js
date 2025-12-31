@@ -198,8 +198,8 @@ var questionOptionsContainer = document.getElementById("questions-options-contai
 var questionCounter = document.getElementById("question-counter")
 
 var hours = 0;
-var minutes = 20;
-var seconds = 60;
+var minutes = 10;
+var seconds = 0;
 
 var totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
 
