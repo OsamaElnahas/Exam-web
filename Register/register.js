@@ -124,6 +124,7 @@ registerForm.addEventListener('submit', function(e) {
         submitBtn.disabled = true;
 
         submitBtn.classList.add("disable");
+
         setTimeout(function() {
             window.location.replace("../login/login.html");
         }, 1500);
