@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- <script src="https://kit.fontawesome.com/408ec1c22a.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="../dist/output.css">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../fontawesome-free-7.1.0-web/css/all.css">
+    <title>ExamX</title>
+</head>
+
+<body>
+    <!-- Outer wrapper to prevent scroll -->
+    <div class=" overflow-hidden main py-10 min-h-screen">
+        <div class="flex flex-col justify-center items-center  text-white gap-6 px-4 text-center fade-in">
+            <!-- Icon -->
+            <div class="p-1 overflow-hidden bg-white rounded-full w-[100px]">
+                <img src="../assets/ChatGPT_Image_Dec_19_2025_11_31_23_PM.png" alt="" width="100%" />
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-2xl sm:text-4xl font-bold" style="text-shadow: 2px 2px 5px rgba(0,0,0,0.4);">Welcome to Exam<span class=" text-4xl text-[var(--primary-color)]" style="text-shadow: 2px 2px 5px rgba(0,0,0,0.4);">X</span></h1>
+
+            <p class="text-sm sm:text-base opacity-90">
+                Your gateway to online examinations.
+            </p>
+
+            <!-- Info Cards -->
+            <div class="flex justify-center flex-col md:flex-row gap-6 sm:gap-10 items-center flex-wrap xl:flex-nowrap w-full px-10 md:px-40 mt-24">
+                <!-- Card -->
+
+                <div class="card-container p-5 shadow-xl   bg-[var(--primary-color)] flex items-center  gap-4 rounded-2xl  flex-1 w-full">
+                    <div class="bg-[var(--third-color)] shadow-lg p-3 rounded-full h-16 w-16 flex justify-center items-center">
+
+                        <i class="fa-solid fa-book-open text-3xl"></i>
+                    </div>
+                    <div class="flex flex-col gap-2 items-start justify-start">
+                        <h2 class="text-xl  font-bold text-[#2d4f61]">Course</h2>
+                        <p class="text-sm  font-semibold">Client Side</p>
+                    </div>
+
+                </div>
+                <div class="card-container p-5 shadow-xl   bg-[var(--primary-color)] flex items-center  gap-4 rounded-2xl  flex-1 w-full">
+                    <div class="bg-[var(--third-color)] shadow-lg p-3 rounded-full h-16 w-16 flex justify-center items-center">
+
+                        <i class="fa fa-clock text-3xl" aria-hidden="true"></i>
+                    </div>
+                    <div class="flex flex-col gap-2 items-start justify-start">
+                        <h2 class="text-xl  font-bold text-[#2d4f61]">Duration</h2>
+                        <p class="text-sm  font-semibold">30 minitues</p>
+                    </div>
+                    <!-- <i class="fa-clock text-2xl text-red-400"></i> -->
+
+                </div>
+                <div class="card-container p-5 shadow-xl   bg-[var(--primary-color)] flex items-center  gap-4 rounded-2xl  flex-1 w-full">
+                    <div class="bg-[var(--third-color)] shadow-lg p-3 rounded-full h-16 w-16 flex justify-center items-center">
+
+                        <i class="fa-solid fa-circle-question rounded-full text-3xl"></i>
+                    </div>
+                    <div class="flex flex-col gap-2 items-start justify-start">
+                        <h2 class="text-xl  font-bold text-[#2d4f61]">Questions</h2>
+                        <p class="text-sm  font-semibold">10</p>
+                    </div>
+                    <!-- <i class="fa-clock text-2xl text-red-400"></i> -->
+
+                </div>
+
+
+            </div>
+
+            <!-- Button -->
+            <button id="start-exam" class="mt-16 md:mt-28 bg-[linear-gradient(135deg,var(--primary-color)_0%,var(--third-color)_30%,var(--secondary-color)_80%)] border border-slate-400 text-white text-sm sm:text-lg py-3 px-16 sm:px-14 rounded-2xl flex items-center gap-4 hover:bg-gray-100 shadow-lg hover:border-gray-200">
+
+          <span id="btn-content" class="flex justify-center items-center gap-5">
+            Start Exam <i class="fa-solid fa-arrow-right"></i>
+          </span>
+          <span
+            id="loading-spinner"
+            class="loading loading-spinner loading-lg hidden"
+          ></span>
+        </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
