@@ -5,8 +5,9 @@
     "main": "tailwind.config.js",
     "scripts": {
         "build-css": "tailwindcss -i ./src/css/input.css -o ./dist/output.css",
-        "build": "node ./node_modules/.bin/tailwindcss -i ./src/css/input.css -o ./dist/output.css",
+        "build": "node -e \"require('fs').mkdirSync('dist', {recursive: true})\" && npx tailwindcss -i ./src/css/input.css -o ./dist/output.css",
         "watch-css": "tailwindcss -i ./src/css/input.css -o ./dist/output.css --watch",
+        "postinstall": "chmod +x node_modules/.bin/* || true",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -22,7 +23,7 @@
     },
     "homepage": "https://github.com/OsamaElnahas/Exam-web#readme",
     "devDependencies": {
-        "daisyui": "^4.12.10"
+        "daisyui": "^5.5.14"
     },
     "dependencies": {
         "autoprefixer": "^10.4.23",
