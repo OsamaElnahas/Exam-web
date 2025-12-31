@@ -5,7 +5,7 @@
     "main": "tailwind.config.js",
     "scripts": {
         "build-css": "tailwindcss -i ./src/css/input.css -o ./dist/output.css",
-        "build": "npx tailwindcss -i ./src/css/input.css -o ./dist/output.css",
+        "build": "node ./node_modules/.bin/tailwindcss -i ./src/css/input.css -o ./dist/output.css",
         "watch-css": "tailwindcss -i ./src/css/input.css -o ./dist/output.css --watch",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -21,7 +21,9 @@
         "url": "https://github.com/OsamaElnahas/Exam-web/issues"
     },
     "homepage": "https://github.com/OsamaElnahas/Exam-web#readme",
-    "devDependencies": {},
+    "devDependencies": {
+        "daisyui": "^4.12.10"
+    },
     "dependencies": {
         "autoprefixer": "^10.4.23",
         "postcss": "^8.5.6",
