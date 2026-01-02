@@ -1,50 +1,70 @@
 :root {
-  --primary-color: #6e9195;
-  --secondary-color: #2d4f61;
-  --third-color: #496f74;
-  --text-color: #333333;
-  --background-color: linear-gradient(
-    135deg,
-    var(--primary-color) 0%,
-    var(--third-color) 37%,
-    var(--secondary-color) 83%
-  );
+    --primary-color: #6e9195;
+    --secondary-color: #2d4f61;
+    --third-color: #496f74;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 * {
-  font-family: "Inter", sans-serif;
-}
-
-.main {
-  background: linear-gradient(
-    135deg,
-    var(--primary-color) 0%,
-    var(--third-color) 37%,
-    var(--secondary-color) 83%
-  );
+    font-family: "Inter", sans-serif;
 }
 
 body {
-  background: linear-gradient(
-    to bottom right,
-    #6e9195,
-    #496f74,
-    #2d4f61
-  ) !important;
+    background: rgb(253, 253, 253);
+}
+
+.main {
+    background: rgb(253, 253, 253);
 }
 
 .fade-in {
-  animation: fadeIn 1.1s ease-out;
+    animation: fadeIn 1.1s ease-out;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-container {
+    background: linear-gradient( 135deg, var(--primary-color) 0%, var(--third-color) 37%, var(--secondary-color) 83%);
+    color: white;
+    transition: 0.3s ease;
+}
+
+.card-container:hover {
+    transform: scale(1.08);
+}
+
+.icon-wrapper {
+    background: rgba(255, 255, 255, 0.063);
+    /* padding: 6px; */
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-btn {
+    background: linear-gradient( 135deg, var(--primary-color) 0%, var(--third-color) 30%, var(--secondary-color) 80%);
+    color: white;
+    padding: 14px 56px;
+    border-radius: 16px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease;
+}
+
+.start-btn:hover {
+    transform: scale(1.1);
 }

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../dist/output.css">
     <link rel="stylesheet" href="exam.css">
     <link rel="stylesheet" href="../fontawesome-free-7.1.0-web/css/all.css">
 
@@ -33,13 +33,13 @@
             </div>
             <div class=" md:hidden flex-1  p-2   flex flex-col gap-1 rounded-xl opacity-90 border border-slate-400 min-w-[170px] max-w-[170px]  " id="indicator-container">
                 <div class="time flex  gap-2">
-                    <div class="icon text-white font-bold  "> <i class="far fa-clock text-2xl"></i>
+                    <div class="icon text-white font-bold timerIcon "> <i class="far fa-clock text-2xl"></i>
                     </div>
                     <div class="flex flex-col gap-1">
 
-                        <div class="text-[15px]">40:33</div>
+                        <div class="text-[15px] timer">40:33</div>
                         <div class="w-full bg-[var(--primary-color)] bg-opacity-20 rounded-full h-2 my-3 shadow-xl">
-                            <div class="bg-[var(--secondary-color)] h-2 rounded-full transition-all duration-300" id="timer-bar" style="width: 32%"></div>
+                            <div class="bg-[var(--secondary-color)] h-2 rounded-full transition-all duration-300 timer-bar" style="width: 32%"></div>
                         </div>
                     </div>
                 </div>
@@ -72,14 +72,14 @@
             <div class="md:col-span-4 lg:col-span-3 ">
                 <div class="hidden bg-[linear-gradient(135deg,var(--primary-color)_0%,var(--third-color)_37%,var(--secondary-color)_83%)] md:flex flex-1 mb-6 px-2 md:px-3 py-5  flex-col gap-2 rounded-xl opacity-90  w-full min-w-[200px] shadow-md" id="indicator-container">
                     <div class="time flex  gap-3 text-gray-100">
-                        <div class="icon  font-bold  "> <i class="far fa-clock text-4xl" id="timerIcon"></i>
+                        <div class="icon  font-bold  timerIcon"> <i class="far fa-clock text-4xl "></i>
                         </div>
                         <div class="flex flex-col gap-1 flex-1">
 
-                            <div class=" font-bold" id="timer">40:33</div>
+                            <div class=" font-bold timer">40:33</div>
 
                             <div class="w-full bg-[var(--primary-color)] bg-opacity-20 rounded-full h-2 my-3 shadow-xl">
-                                <div class="bg-[var(--secondary-color)] h-2 rounded-full transition-all duration-300" id="timer-barr"></div>
+                                <div class="bg-[var(--secondary-color)] h-2 rounded-full transition-all duration-300 timer-bar"></div>
                             </div>
                         </div>
 

@@ -1,36 +1,43 @@
-// ================= Toast =================
-if (!localStorage.getItem("userData")) {
-    window.location.replace("../Register/regeister.html")
+if (!localStorage.getItem("currentUserId")) {
+    window.location.replace("../login/login.html");
 }
 
-// if (localStorage.getItem("submitted")) {
-//         window.location.replace("../exam-results/index.html")
-// }
 
 
+var users = JSON.parse(localStorage.getItem("users")) || [];
+var currentUserId = Number(localStorage.getItem("currentUserId"));
 
-var toast = document.getElementById("toastCard");
-var userData = JSON.parse(localStorage.getItem("userData"));
-
-toast.textContent = "Welcome " + userData.firstName + " !";
-
-document.getElementById("userNameDisplay").textContent =
-    userData.firstName + " " + userData.lastName;
-
-setTimeout(function() {
-    toast.classList.add("active");
-}, 300);
-
-setTimeout(function() {
-    toast.classList.remove("active");
-}, 3000);
+var currentUser = null;
 
 
+for (var i = 0; i < users.length; i++) {
+    if (users[i].id === currentUserId) {
+        currentUser = users[i];
+        break;
+    }
+}
 
-var currentQuestionIndex = 0;
+function saveCurrentUser() {
+    for (var i = 0; i < users.length; i++) {
+        if (users[i].id === currentUser.id) {
+            users[i] = currentUser;
+            break;
+        }
+    }
+    localStorage.setItem("users", JSON.stringify(users));
+}
 
 
-var questions = [{
+if (currentUser.exam.submitted) {
+    window.location.replace("../exam-result/result.html");
+}
+
+
+if (!currentUser) {
+    window.location.replace("../login/login.html");
+}
+
+var questionsTemplate = [{
         question: "What does HTML stand for?",
         correct_answer: "HyperText Markup Language",
         answers: [
@@ -55,108 +62,134 @@ var questions = [{
         marked: false
     },
     {
-        question: "Which JavaScript keyword is used to declare a constant?",
-        correct_answer: "const",
+        question: "What is the correct HTML tag for inserting an image?",
+        correct_answer: "<img>",
         answers: [
-            "var",
-            "let",
-            "const",
-            "static"
+            "<image>",
+            "<img>",
+            "<src>",
+            "<picture>"
         ],
         choosen_answer: "",
         marked: false
     },
     {
-        question: "Which HTML tag is used to create a hyperlink?",
+        question: "Which CSS property is used to change the background color of an element?",
+        correct_answer: "background-color",
+        answers: [
+            "color",
+            "bgcolor",
+            "background-color",
+            "background"
+        ],
+        choosen_answer: "",
+        marked: false
+    },
+    {
+        question: "How do you create a hyperlink in HTML?",
         correct_answer: "<a>",
         answers: [
             "<link>",
-            "<href>",
             "<a>",
-            "<nav>"
+            "<href>",
+            "<url>"
         ],
         choosen_answer: "",
         marked: false
     },
     {
-        question: "Which method is used to add an element at the end of an array in JavaScript?",
-        correct_answer: "push()",
+        question: "Which CSS property controls the text color?",
+        correct_answer: "color",
         answers: [
-            "add()",
-            "insert()",
-            "push()",
-            "append()"
+            "text-color",
+            "font-color",
+            "color",
+            "foreground-color"
         ],
         choosen_answer: "",
         marked: false
     },
     {
-        question: "Which method is used to add an element at the end of an array in JavaScript?",
-        correct_answer: "push()",
+        question: "What does CSS stand for?",
+        correct_answer: "Cascading Style Sheets",
         answers: [
-            "add()",
-            "insert()",
-            "push()",
-            "append()"
+            "Creative Style Sheets",
+            "Computer Style Sheets",
+            "Cascading Style Sheets",
+            "Colorful Style Sheets"
         ],
         choosen_answer: "",
         marked: false
     },
     {
-        question: "Which method is used to add an element at the end of an array in JavaScript?",
-        correct_answer: "push()",
+        question: "In JavaScript, which method is used to write text to the HTML document?",
+        correct_answer: "document.write()",
         answers: [
-            "add()",
-            "insert()",
-            "push()",
-            "append()"
+            "console.log()",
+            "document.write()",
+            "alert()",
+            "print()"
         ],
         choosen_answer: "",
         marked: false
     },
     {
-        question: "Which method is used to add an element at the end of an array in JavaScript?",
-        correct_answer: "push()",
+        question: "How do you select an element with id 'demo' in CSS?",
+        correct_answer: "#demo",
         answers: [
-            "add()",
-            "insert()",
-            "push()",
-            "append()"
+            ".demo",
+            "#demo",
+            "demo",
+            "*demo"
         ],
         choosen_answer: "",
         marked: false
     },
     {
-        question: "Which method is used to add an element at the end of an array in JavaScript?",
-        correct_answer: "push()",
+        question: "Which HTML tag is used to define an unordered list?",
+        correct_answer: "<ul>",
         answers: [
-            "add()",
-            "insert()",
-            "push()",
-            "append()"
-        ],
-        choosen_answer: "",
-        marked: false
-    },
-    {
-        question: "Which method is used to add an element at the end of an array in JavaScript?",
-        correct_answer: "push()",
-        answers: [
-            "add()",
-            "insert()",
-            "push()",
-            "append()"
+            "<ol>",
+            "<ul>",
+            "<li>",
+            "<list>"
         ],
         choosen_answer: "",
         marked: false
     }
 ];
 
-var savedQuestions = localStorage.getItem("questions");
+if (currentUser.exam.questions.length === 0) {
+    currentUser.exam.questions =
+        JSON.parse(JSON.stringify(questionsTemplate));
+    saveCurrentUser()
 
-if (savedQuestions) {
-    questions = JSON.parse(savedQuestions);
+
 }
+
+
+
+
+var toast = document.getElementById("toastCard");
+
+toast.textContent = "Welcome " + currentUser.firstName + " !";
+
+document.getElementById("userNameDisplay").textContent =
+    currentUser.firstName + " " + currentUser.lastName;
+
+setTimeout(function() {
+    toast.classList.add("active");
+}, 300);
+
+setTimeout(function() {
+    toast.classList.remove("active");
+}, 3000);
+
+var questions = currentUser.exam.questions;
+
+
+var currentQuestionIndex = 0;
+
 
 
 var questionText = document.getElementById("question-text");
@@ -165,100 +198,121 @@ var questionOptionsContainer = document.getElementById("questions-options-contai
 var questionCounter = document.getElementById("question-counter")
 
 var hours = 0;
-var minutes = 0;
-var seconds = 40;
+var minutes = 10;
+var seconds = 0;
 
-localStorage.removeItem("remainingSeconds")
 var totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+
 var remainingSeconds = localStorage.getItem("remainingSeconds") ?
     parseInt(localStorage.getItem("remainingSeconds")) :
     totalSeconds;
 
 
-var timer = document.getElementById("timer");
-var timerBar = document.getElementById("timer-barr");
-var timerIcon = document.getElementById("timerIcon")
+var timer = document.querySelectorAll(".timer");
+var timerBar = document.querySelectorAll(".timer-bar");
+var timerIcon = document.querySelectorAll(".timerIcon");
+
+var timeUpModal = document.getElementById("timeup-modal");
+var viewResultsBtn = document.getElementById("view-results-btn");
+
+
+
 
 function format(num) {
-    return num < 10 ? "0" + num : num;
+    if (num < 10) {
+        return "0" + num;
+    }
+    return num;
 }
 
-const timeUpModal = document.getElementById("timeup-modal");
 
 function showTimeUpModal() {
     timeUpModal.classList.remove("hidden");
 
-    setTimeout(() => {
+    setTimeout(function() {
         timeUpModal.querySelector("div")
             .classList.add("show-modal");
     }, 50);
 
     document.body.style.overflow = "hidden";
 }
-document.getElementById("view-results-btn").onclick = function() {
-
-
-    goResults()
-
-};
-
-
 
 function showTimer() {
     var h = Math.floor(remainingSeconds / 3600);
     var m = Math.floor((remainingSeconds % 3600) / 60);
     var s = remainingSeconds % 60;
 
-    timer.textContent =
-        format(h) + " : " + format(m) + " : " + format(s);
-
-    var elapsed = totalSeconds - remainingSeconds;
-
-    var percent = (elapsed / totalSeconds) * 100;
-    timerBar.style.width = percent + "%";
-
-    if (percent >= 75) {
-        timerBar.classList.add("bg-red-500");
-        if (percent >= 90) {
-            timerIcon.classList.add("timer-warning")
-            timerIcon.classList.add("scaling")
-        }
-
-    } else if (percent >= 50) {
-        timerBar.classList.add("bg-yellow-400");
+    // Update timer text
+    for (var i = 0; i < timer.length; i++) {
+        timer[i].textContent =
+            format(h) + " : " + format(m) + " : " + format(s);
     }
 
+    var elapsed = totalSeconds - remainingSeconds;
+    var percent = (elapsed / totalSeconds) * 100;
+
+    // Update progress bar
+    for (var j = 0; j < timerBar.length; j++) {
+        timerBar[j].style.width = percent + "%";
+
+        if (percent >= 75) {
+            timerBar[j].classList.add("bg-red-500");
+        } else if (percent >= 50) {
+            timerBar[j].classList.add("bg-yellow-400");
+        }
+    }
+
+    if (percent >= 90) {
+        for (var k = 0; k < timerIcon.length; k++) {
+            timerIcon[k].classList.add("timer-warning");
+            timerIcon[k].classList.add("scaling");
+        }
+    }
 }
 
 var timerInterval = setInterval(function() {
+
     if (remainingSeconds <= 0) {
         clearInterval(timerInterval);
-        timer.textContent = "Time Over";
-        timerBar.style.width = "100%";
-        showTimeUpModal()
+
+        for (var i = 0; i < timer.length; i++) {
+            timer[i].textContent = "Time Over";
+        }
+
+        for (var j = 0; j < timerBar.length; j++) {
+            timerBar[j].style.width = "100%";
+        }
+
+        showTimeUpModal();
         submitExam();
         return;
     }
 
     remainingSeconds--;
-    // localStorage.setItem("remainingSeconds", remainingSeconds);
-
+    localStorage.setItem("remainingSeconds", remainingSeconds);
 
     showTimer();
+
 }, 1000);
+
+viewResultsBtn.onclick = function() {
+    goResults();
+};
+
 
 showTimer();
 
 
 function showQuestion() {
     var q = questions[currentQuestionIndex];
+
     questionText.textContent = q.question;
+
     if (currentQuestionIndex == questions.length - 1) {
         document.getElementById("next-btn").classList.add("disable")
 
     } else {
         document.getElementById("next-btn").classList.remove("disable")
-
 
     }
     if (currentQuestionIndex == 0) {
@@ -270,9 +324,10 @@ function showQuestion() {
 
     }
 
-    optionCards.forEach((card, index) => {
+    optionCards.forEach(function(card, index) {
         card.classList.remove("selected");
-        card.querySelector("p").textContent = q.answers[index];
+
+        card.textContent = q.answers[index];
 
         if (q.choosen_answer === q.answers[index]) {
             card.classList.add("selected");
@@ -289,20 +344,28 @@ function showQuestion() {
 
 
 function selectAnswer(card, answer) {
+
     for (var i = 0; i < optionCards.length; i++) {
         optionCards[i].classList.remove("selected");
     }
 
     card.classList.add("selected");
-    questions[currentQuestionIndex].choosen_answer = answer;
-    localStorage.setItem("questions", JSON.stringify(questions));
 
+    currentUser.exam.questions[currentQuestionIndex].choosen_answer = answer;
+
+    saveCurrentUser()
 
     updateProgress();
 }
-optionCards.forEach((card, index) => {
+
+
+
+
+
+optionCards.forEach(function(card, index) {
     card.addEventListener("click", function(e) {
-        const answer = questions[currentQuestionIndex].answers[index];
+        var answer = questions[currentQuestionIndex].answers[index];
+
         selectAnswer(e.currentTarget, answer);
 
     });
@@ -314,8 +377,11 @@ document.getElementById("next-btn").onclick = function() {
         currentQuestionIndex++;
         showQuestion();
         animateQuestion("next");
+
         updateCounter();
+
         renderQuestionNavigator();
+
         renderQuestionNavigatorMobile()
 
     }
@@ -337,11 +403,11 @@ document.getElementById("prev-btn").onclick = function() {
 };
 
 
-const markBtn = document.getElementById("mark-review");
-const markIcon = document.getElementById("mark-icon");
+var markBtn = document.getElementById("mark-review");
+var markIcon = document.getElementById("mark-icon");
 
 markBtn.addEventListener("click", function() {
-    const q = questions[currentQuestionIndex];
+    var q = questions[currentQuestionIndex];
 
     q.marked = !q.marked;
 
@@ -402,8 +468,6 @@ function calcScore() {
             score++;
         }
     }
-    localStorage.setItem("score", score);
-
 }
 
 
@@ -413,7 +477,7 @@ var modalBox = document.getElementById("modalBox");
 var overlay = document.getElementById("modalOverlay");
 var cancelBtn = document.getElementById("cancelSubmit");
 var confirmBtn = document.getElementById("confirmSubmit");
-const loader = document.getElementById("global-loader");
+var loader = document.getElementById("global-loader");
 
 function showLoader() {
     loader.classList.remove("hidden");
@@ -429,7 +493,7 @@ function openModal() {
     submitModal.classList.remove("hidden");
     submitModal.classList.add("flex");
 
-    setTimeout(() => {
+    setTimeout(function() {
         modalBox.classList.remove("scale-95", "opacity-0");
         modalBox.classList.add("scale-100", "opacity-100");
     }, 10);
@@ -438,7 +502,7 @@ function openModal() {
 function closeModal() {
     modalBox.classList.add("scale-95", "opacity-0");
 
-    setTimeout(() => {
+    setTimeout(function() {
         submitModal.classList.add("hidden");
         submitModal.classList.remove("flex");
     }, 200);
@@ -450,9 +514,9 @@ cancelBtn.addEventListener("click", closeModal);
 
 overlay.addEventListener("click", closeModal);
 
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
-});
+// document.addEventListener("keydown", function() {
+//     if (e.key === "Escape") closeModal();
+// });
 
 document.getElementById("confirmSubmit").onclick = function() {
     closeModal();
@@ -462,20 +526,29 @@ document.getElementById("confirmSubmit").onclick = function() {
 
 };
 
+
+
 function submitExam() {
     clearInterval(timerInterval);
-    calcScore()
-    localStorage.removeItem("remainingSeconds");
-    localStorage.setItem("submitted", true)
+    calcScore();
 
+    currentUser.exam.submitted = true;
+    currentUser.exam.score = score;
+
+    saveCurrentUser();
+
+    localStorage.removeItem("remainingSeconds");
 }
+
+
+// localStorage.removeItem("submitted")
 
 function goResults() {
     showLoader();
-    setTimeout(() => {
+    setTimeout(function() {
         hideLoader();
-        window.location.replace("../exam-results/index.html")
-    }, 2000);
+        window.location.replace("../exam-result/result.html")
+    }, 1500);
 }
 
 
@@ -486,8 +559,8 @@ var questionGridMobile = document.getElementById('question-grid-mobile');
 function renderQuestionNavigator() {
     questionGrid.innerHTML = "";
 
-    questions.forEach((q, index) => {
-        const btn = document.createElement("button");
+    questions.forEach(function(q, index) {
+        var btn = document.createElement("button");
         btn.textContent = index + 1;
 
         btn.className =
@@ -503,7 +576,7 @@ function renderQuestionNavigator() {
             btn.classList.add("unanswered");
         }
 
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", function() {
             currentQuestionIndex = index;
             showQuestion();
             animateQuestion("next");
@@ -518,8 +591,8 @@ function renderQuestionNavigator() {
 function renderQuestionNavigatorMobile() {
     questionGridMobile.innerHTML = "";
 
-    questions.forEach((q, index) => {
-        const btn = document.createElement("button");
+    questions.forEach(function(q, index) {
+        var btn = document.createElement("button");
         btn.textContent = index + 1;
 
         btn.className =
@@ -535,7 +608,7 @@ function renderQuestionNavigatorMobile() {
             btn.classList.add("unanswered");
         }
 
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", function() {
             currentQuestionIndex = index;
             showQuestion();
             animateQuestion("next");

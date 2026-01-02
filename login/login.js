@@ -1,64 +1,57 @@
-console.log(JSON.parse(localStorage.getItem("userData")));
-
 var emailInput = document.getElementById("email");
 var passwordInput = document.getElementById("password");
 var loginBtn = document.getElementById("loginBtn");
+
 var emailErrMsg = document.getElementById("emailErrMsg");
 var passwordErrMsg = document.getElementById("passwordErrMsg");
 
-if (localStorage.getItem("isLoggedIn")) {
-  window.location.replace("../start-exam/index.html");
-}
+var btnContent = document.getElementById("btn-content")
+var loadingSpinner = document.getElementById("loading-spinner")
 
-function validateEmailPassword(email, password) {
-  emailErrMsg.textContent = "";
-  passwordErrMsg.textContent = "";
 
-  if (!email || !password) {
-    emailErrMsg.textContent = "Email is required.";
-    passwordErrMsg.textContent = "Password is required.";
-    return false;
-  }
 
-  var users = localStorage.getItem("users");
-  if (users) {
-    users = JSON.parse(users);
-  } else {
-    users = [];
-  }
 
-  var foundUser = null;
+function validateLogin(email, password) {
 
-  users.forEach(function (user) {
-    if (user.email === email && user.password === password) {
-      foundUser = user;
+    if (!email || !password) {
+        emailErrMsg.textContent = "Email is required.";
+        passwordErrMsg.textContent = "Password is required.";
+        return false;
     }
-  });
 
-  if (foundUser) {
-    emailErrMsg.textContent = "";
-    passwordErrMsg.textContent = "";
+    var users = JSON.parse(localStorage.getItem("users")) || [];
 
-    localStorage.setItem("currentUser", JSON.stringify(foundUser));
-    localStorage.setItem("isLoggedIn", "true");
+    for (var i = 0; i < users.length; i++) {
+        if (
+            users[i].email === email &&
+            users[i].password === password
+        ) {
+            localStorage.setItem("currentUserId", users[i].id);
+            emailErrMsg.textContent = "";
+            passwordErrMsg.textContent = "";
+            return true;
+        }
+    }
 
-    return true;
-  } else {
-    passwordErrMsg.textContent = "Incorrect email or password";
+    passwordErrMsg.textContent = "Incorrect email or password.";
     return false;
-  }
 }
 
-loginBtn.addEventListener("click", function (e) {
-  e.preventDefault();
+loginBtn.addEventListener("click", function(e) {
+    e.preventDefault();
 
-  if (validateEmailPassword(emailInput.value, passwordInput.value)) {
-    loginBtn.textContent = "Logging in...";
-    loginBtn.disabled = true;
-    loginBtn.style.cursor = "not-allowed";
+    if (validateLogin(emailInput.value, passwordInput.value)) {
 
-    setTimeout(function () {
-      window.location.replace("../start-exam/index.html");
-    }, 1500);
-  }
+
+        btnContent.style.display = "none";
+        loadingSpinner.style.display = "block";
+
+        loginBtn.disabled = true;
+
+        loginBtn.classList.add("disable");
+
+        setTimeout(function() {
+            window.location.replace("../start-exam/start.html");
+        }, 2000);
+    }
 });
