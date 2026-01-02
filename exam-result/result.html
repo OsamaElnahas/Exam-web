@@ -1,105 +1,163 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="result.css" />
-    <link rel="stylesheet" href="../fontawesome-free-7.1.0-web/css/all.css">
-    <link rel="stylesheet" href="../dist/output.css">
+    <link rel="stylesheet" href="../fontawesome-free-7.1.0-web/css/all.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="../dist/output.css" />
 
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- nav start  -->
-    <div class="toast-container bg-green-200 text-green-700 font-bold w-[300px] py-3 px-4 rounded-md text-center border border-green-700 shadow-lg" id="toastCard"></div>
-    <div class="header  gap-4 w-[100%] px-6 py-3  md:px-14 flex items-center flex-wrap shadow-lg  sticky top-0 z-50 fade-in">
-
-        <div class="title flex items-center  justify-start gap-3">
-
-            <div class="logo flex justify-center   bg-white shadow-lg w-[50px] h-[50px] p-2  md:w-[60px] md:h-[60px] md:p-2 items-center rounded-full mx-auto fade-in-out border-2 border-gray-200 flex-shrink-0">
-                <img src="../assets/ChatGPT_Image_Dec_19_2025_11_31_23_PM.png" class="w-[100%]" alt="ExamWeb Logo" />
-            </div>
-
-            <div class="text-md md:text-lg font-bold w-[100%] fade-in">Programming Exam</div>
+    <div
+      class="toast-container bg-green-200 text-green-700 font-bold w-[300px] py-3 px-4 rounded-md text-center border border-green-700 shadow-lg"
+      id="toastCard"
+    ></div>
+    <div
+      class="header gap-4 w-[100%] px-6 py-3 md:px-14 flex items-center flex-wrap shadow-lg sticky top-0 z-50 fade-in"
+    >
+      <div class="title flex items-center justify-start gap-3">
+        <div
+          class="logo flex justify-center bg-white shadow-lg w-[50px] h-[50px] p-2 md:w-[60px] md:h-[60px] md:p-2 items-center rounded-full mx-auto fade-in-out border-2 border-gray-200 flex-shrink-0"
+        >
+          <img
+            src="../assets/ChatGPT_Image_Dec_19_2025_11_31_23_PM.png"
+            class="w-[100%]"
+            alt="ExamWeb Logo"
+          />
         </div>
-        <div class="right-side  lg:mt-0  ml-auto flex  items-center gap-6   justify-between   w-[100%] md:w-auto fade-in">
 
-            <div class="user-name text-[12px] md:text-md font-medium ">
-                Student
-                <div id="userNameDisplay" class="font-bold text-[14px] md:text-[17px] text-wrap">
-                </div>
-
-            </div>
-            <div>
-                <button class="py-2 px-4 rounded-lg text-white font-semibold text-[14px] border border-gray-400 hover:bg-white transition delay-50 duration-300 ease-in-out hover:text-[--secondary-color] flex gap-2 items-center" id="logout-btn">
-                       Logout
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <div class="text-md md:text-lg font-bold w-[100%] fade-in">
+          Programming Exam
+        </div>
+      </div>
+      <div
+        class="right-side lg:mt-0 ml-auto flex items-center gap-6 justify-between w-[100%] md:w-auto fade-in"
+      >
+        <div class="user-name text-[12px] md:text-md font-medium">
+          Student
+          <div
+            id="userNameDisplay"
+            class="font-bold text-[14px] md:text-[17px] text-wrap"
+          ></div>
+        </div>
+        <div>
+          <button
+            class="py-2 px-4 rounded-lg text-white font-semibold text-[14px] border border-gray-400 hover:bg-white transition delay-50 duration-300 ease-in-out hover:text-[--secondary-color] flex gap-2 items-center"
+            id="logout-btn"
+          >
+            <span class="flex gap-2 items-center" id="btn-content"
+              >Logout
+              <i
+                class="fa-solid fa-arrow-right-from-bracket"
+                id="logout-icon"
+              ></i>
+            </span>
+            <span
+              id="loading-spinner"
+              class="loading loading-spinner loading-lg hidden"
+            ></span>
           </button>
-            </div>
-
-
-
-
         </div>
-
-
-
+      </div>
     </div>
     <!-- nav end  -->
 
     <div class="container px-5 mx-auto py-2">
-        <div class="flex justify-center items-center flex-col bg-white shadow-md rounded-xl py-4 px-8 gap-5">
-
-
-
-
-            <div class="grid grid-cols-2 gap-5 md:grid-cols-4 w-full items-center">
-                <div class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]">
-                    <h3 class="text-[24px] font-bold correct-answer" id="nums-of-correct">22</h3>
-                    <p class="font-semibold text-[18px]">Correct</p>
+      <div
+        class="flex justify-center items-center flex-col bg-white shadow-md rounded-xl py-4 px-8 gap-5"
+      >
+        <div class="grid grid-cols-2 gap-5 md:grid-cols-4 w-full items-center">
+          <div
+            class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]"
+          >
+            <h3
+              class="text-[24px] font-bold correct-answer"
+              id="nums-of-correct"
+            >
+              22
+            </h3>
+            <p class="font-semibold text-[18px]">Correct</p>
+          </div>
+          <div
+            class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]"
+          >
+            <h3
+              class="text-[24px] font-bold incorrect-answer"
+              id="nums-of-incorrect"
+            >
+              2
+            </h3>
+            <p class="font-semibold text-[18px]">Incorrect</p>
+          </div>
+          <div
+            class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]"
+          >
+            <h3
+              class="text-[24px] font-bold skipped-answer"
+              id="nums-of-skipped"
+            >
+              1
+            </h3>
+            <p class="font-semibold text-[18px]">Skipped</p>
+          </div>
+          <div
+            class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]"
+          >
+            <h3 class="text-[24px] font-bold total-answers" id="nums-of-total">
+              25
+            </h3>
+            <p class="font-semibold text-[18px]">Total</p>
+          </div>
+        </div>
+        <div class="mx-auto my-0 py-5 w-full fade-in overflow-hidden">
+          <div
+            class="grid grid-cols-1 md:grid-cols-12 gap-6 w-full slide-right"
+          >
+            <div class="md:col-span-4 lg:col-span-3">
+              <div
+                class="w-full flex flex-col items-center gap-4 justify-center mb-8"
+              >
+                <div
+                  class="radial-progress flex flex-col justify-center items-center w-[100px] h-[100px]"
+                  style="--value: 70; --thickness: 6px"
+                  aria-valuenow="70"
+                  role="progressbar"
+                  id="percentage-bar"
+                >
+                  <p class="text-xl font-bold text-black" id="percent"></p>
+                  <p class="text-gray-400 text-sm">Your Score</p>
                 </div>
-                <div class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]">
-                    <h3 class="text-[24px] font-bold incorrect-answer" id="nums-of-incorrect">2</h3>
-                    <p class="font-semibold text-[18px]">Incorrect</p>
+
+                <div
+                  class="flex py-2 px-4 md:px-5 justify-center items-center font-bold rounded-xl gap-2 text-[13px] md:text-[16px]"
+                  id="msg-container"
+                >
+                  <i class="text-[19px]" id="msg-icon"></i>
+                  <p id="result-message"></p>
                 </div>
-                <div class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]">
-                    <h3 class="text-[24px] font-bold skipped-answer" id="nums-of-skipped">1</h3>
-                    <p class="font-semibold text-[18px]">Skipped</p>
-                </div>
-                <div class="flex justify-center items-center flex-col text-center py-5 px-16 rounded-xl bg-[#f3f1f1]">
-                    <h3 class="text-[24px] font-bold total-answers" id="nums-of-total">25</h3>
-                    <p class="font-semibold text-[18px]">Total</p>
-                </div>
-            </div>
-            <div class=" mx-auto my-0    py-5 w-full fade-in  overflow-hidden">
+              </div>
+              <!-- Question Navigator Sidebar -->
+              <div
+                class="bg-white rounded-xl px-5 py-3 bg-[linear-gradient(135deg,var(--primary-color)_0%,var(--third-color)_37%,var(--secondary-color)_83%)] sticky top-24 shadow-lg hidden md:block"
+              >
+                <!-- <h3 class="text-lg font-bold text-gray-50 mb-4 hidden md:block">Question Navigator</h3> -->
 
-
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 w-full slide-right">
-
-                    <div class="md:col-span-4 lg:col-span-3">
-                        <div class="w-full flex flex-col items-center gap-4 justify-center mb-8">
-
-                            <div class="radial-progress flex flex-col justify-center items-center  w-[100px] h-[100px]" style="--value: 70; --thickness: 6px" aria-valuenow="70" role="progressbar" id="percentage-bar">
-                                <p class="text-xl font-bold text-black" id="percent"></p>
-                                <p class="text-gray-400 text-sm">Your Score</p>
-                            </div>
-
-
-                            <div class="flex py-2 px-4 md:px-5 justify-center items-center font-bold rounded-xl gap-2 text-[13px] md:text-[16px]" id="msg-container">
-                                <i class=" text-[19px]" id="msg-icon"></i>
-                                <p id="result-message"></p>
-                            </div>
-
-                        </div>
-                        <!-- Question Navigator Sidebar -->
-                        <div class="bg-white   rounded-xl px-5 py-3 bg-[linear-gradient(135deg,var(--primary-color)_0%,var(--third-color)_37%,var(--secondary-color)_83%)]  sticky top-24 shadow-lg hidden md:block">
-                            <!-- <h3 class="text-lg font-bold text-gray-50 mb-4 hidden md:block">Question Navigator</h3> -->
-
-                            <!-- Legend -->
-                            <!-- <div class="space-y-2 mb-4 text-sm hidden md:block">
+                <!-- Legend -->
+                <!-- <div class="space-y-2 mb-4 text-sm hidden md:block">
                                 <div class="flex items-center space-x-2">
                                     <div class="w-4 h-4 rounded bg-green-500"></div>
                                     <span class="text-gray-100">Answered</span>
@@ -115,129 +173,175 @@
 
                             </div> -->
 
-                            <!-- <hr class="my-3 hidden md:block"> -->
+                <!-- <hr class="my-3 hidden md:block"> -->
 
-                            <!-- Question Grid -->
-                            <div class="grid md:grid-cols-4 lg:grid-cols-5 grid-cols-6 gap-2" id="question-grid">
-                                <!-- Questions will be dynamically generated -->
+                <!-- Question Grid -->
+                <div
+                  class="grid md:grid-cols-4 lg:grid-cols-5 grid-cols-6 gap-2"
+                  id="question-grid"
+                >
+                  <!-- Questions will be dynamically generated -->
+                </div>
+              </div>
+            </div>
 
-                            </div>
+            <!-- Main Exam Area -->
+            <div class="exam md:col-span-8 lg:col-span-9 w-full">
+              <div
+                class="bg-white rounded-xl shadow-md p-8 font-bold overflow-hidden"
+              >
+                <div id="questions-options-container">
+                  <!-- Question Text -->
+                  <div class="mb-5">
+                    <p
+                      class="text-lg text-gray-700 leading-relaxed text-wrap w-full font-bold text-[var(--secondary-color)] break-words bg-gray-100 rounded-md p-2"
+                      id="question-text"
+                    ></p>
+                  </div>
 
-
+                  <!-- Options -->
+                  <div
+                    class="space-y-2 mb-1 text-[12px] xl:text-[14px] 2xl:text-[16px]"
+                  >
+                    <div
+                      class="option-card border border-gray-100 rounded-lg px-3 py-[12px]"
+                      data-option="A"
+                    >
+                      <div class="flex items-center space-x-2">
+                        <div
+                          class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[var(--primary-color)]"
+                        >
+                          A
                         </div>
-
+                        <p class="text-gray-700 font-medium">
+                          x = -3 or x = 0.5
+                        </p>
+                      </div>
                     </div>
 
-                    <!-- Main Exam Area -->
-                    <div class="exam md:col-span-8 lg:col-span-9 w-full ">
-
-                        <div class="bg-white rounded-xl shadow-md p-8  font-bold overflow-hidden  ">
-
-
-
-
-
-                            <div id="questions-options-container">
-
-
-                                <!-- Question Text -->
-                                <div class="mb-5">
-                                    <p class="text-lg text-gray-700 leading-relaxed text-wrap w-full font-bold text-[var(--secondary-color)] break-words  bg-gray-100 rounded-md p-2" id="question-text">
-                                    </p>
-                                </div>
-
-                                <!-- Options -->
-                                <div class="space-y-2 mb-1 text-[12px] xl:text-[14px] 2xl:text-[16px] ">
-                                    <div class="option-card  border border-gray-100 rounded-lg px-3 py-[12px]" data-option="A">
-                                        <div class="flex items-center space-x-2">
-                                            <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[var(--primary-color)] ">
-                                                A
-                                            </div>
-                                            <p class="text-gray-700 font-medium">x = -3 or x = 0.5</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="option-card  border border-gray-100 rounded-lg px-3 py-[12px] selected" data-option="B">
-                                        <div class="flex items-center space-x-2">
-                                            <div class="w-6 h-6 rounded-full  bg-gray-100 flex items-center justify-center font-bold text-[var(--primary-color)]">
-                                                B
-                                            </div>
-                                            <p class="text-gray-700 font-medium">x = 3 or x = -0.5</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="option-card  border border-gray-100 rounded-lg px-3 py-[12px]" data-option="C">
-                                        <div class="flex items-center space-x-2">
-                                            <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[var(--primary-color)]">
-                                                C
-                                            </div>
-                                            <p class="text-gray-700 font-medium">x = -2 or x = 1.5</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="option-card  border border-gray-100 rounded-lg px-3 py-[12px]" data-option="D">
-                                        <div class="flex items-center space-x-2">
-                                            <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[var(--primary-color)]">
-                                                D
-                                            </div>
-                                            <p class="text-gray-700 font-medium">x = 2 or x = -1.5</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <!-- Action Buttons -->
-                            <div class="flex items-center justify-between pt-4  box-border text-[13px]">
-
-                                <div class="flex  items-center justify-between w-full box-border">
-                                    <button class="px-3  md:px-6 py-2 box-border bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition font-semibold flex items-center" id="prev-btn">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                                </svg>
-                                <span>Previous</span>
-                            </button>
-                                    <div class="text-sm font-bold text-[var(--secondary-color)]" id="question-counter">
-                                        Question 1/10
-                                    </div>
-
-                                    <button class="px-3  md:px-6 py-2 box-border bg-[var(--primary-color)] text-white rounded-lg hover:bg-[var(--third-color)] transition font-semibold flex items-center" id="next-btn">
-                                <span>Next</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                </svg>
-                            </button>
-                                </div>
-                            </div>
-
-
+                    <div
+                      class="option-card border border-gray-100 rounded-lg px-3 py-[12px] selected"
+                      data-option="B"
+                    >
+                      <div class="flex items-center space-x-2">
+                        <div
+                          class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[var(--primary-color)]"
+                        >
+                          B
                         </div>
+                        <p class="text-gray-700 font-medium">
+                          x = 3 or x = -0.5
+                        </p>
+                      </div>
                     </div>
 
-
-                    <!-- Question Navigator in Mobile -->
-                    <div class="bg-white rounded-xl p-6 sticky top-24 shadow-lg  md:hidden">
-
-                        <!-- Question Grid -->
-                        <div class="grid md:grid-cols-5 grid-cols-6 gap-2" id="question-grid-mobile">
-                            <!-- Questions will be  generated -->
-
+                    <div
+                      class="option-card border border-gray-100 rounded-lg px-3 py-[12px]"
+                      data-option="C"
+                    >
+                      <div class="flex items-center space-x-2">
+                        <div
+                          class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[var(--primary-color)]"
+                        >
+                          C
                         </div>
+                        <p class="text-gray-700 font-medium">
+                          x = -2 or x = 1.5
+                        </p>
+                      </div>
                     </div>
 
-
-
-
-
+                    <div
+                      class="option-card border border-gray-100 rounded-lg px-3 py-[12px]"
+                      data-option="D"
+                    >
+                      <div class="flex items-center space-x-2">
+                        <div
+                          class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[var(--primary-color)]"
+                        >
+                          D
+                        </div>
+                        <p class="text-gray-700 font-medium">
+                          x = 2 or x = -1.5
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
+                <!-- Action Buttons -->
+                <div
+                  class="flex items-center justify-between pt-4 box-border text-[13px]"
+                >
+                  <div
+                    class="flex items-center justify-between w-full box-border"
+                  >
+                    <button
+                      class="px-3 md:px-6 py-2 box-border bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition font-semibold flex items-center"
+                      id="prev-btn"
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 19l-7-7 7-7"
+                        ></path>
+                      </svg>
+                      <span>Previous</span>
+                    </button>
+                    <div
+                      class="text-sm font-bold text-[var(--secondary-color)]"
+                      id="question-counter"
+                    >
+                      Question 1/10
+                    </div>
+
+                    <button
+                      class="px-3 md:px-6 py-2 box-border bg-[var(--primary-color)] text-white rounded-lg hover:bg-[var(--third-color)] transition font-semibold flex items-center"
+                      id="next-btn"
+                    >
+                      <span>Next</span>
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <!-- Question Navigator in Mobile -->
+            <div
+              class="bg-white rounded-xl p-6 sticky top-24 shadow-lg md:hidden"
+            >
+              <!-- Question Grid -->
+              <div
+                class="grid md:grid-cols-4 lg:grid-cols-5 grid-cols-6 gap-2"
+                id="question-grid-mobile"
+              >
+                <!-- Questions will be  generated -->
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-
-</body>
-<script src="result.js"></script>
-
+  </body>
+  <script src="result.js"></script>
 </html>
