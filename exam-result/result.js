@@ -206,7 +206,8 @@ function renderQuestionNavigator() {
     const btn = document.createElement("button");
     btn.textContent = index + 1;
 
-    btn.className = "question-nav-btn px-7 py-3 rounded font-semibold text-sm";
+    btn.className =
+      "question-nav-btn w-full h-10 rounded font-semibold text-sm";
 
     if (index === currentQuestionIndex) {
       btn.classList.add("current");
@@ -237,7 +238,8 @@ function renderQuestionNavigatorMobile() {
     const btn = document.createElement("button");
     btn.textContent = index + 1;
 
-    btn.className = "question-nav-btn px-7 py-3 rounded font-semibold text-sm";
+    btn.className =
+      "question-nav-btn w-full h-10 rounded font-semibold text-sm";
 
     if (index === currentQuestionIndex) {
       btn.classList.add("current");
