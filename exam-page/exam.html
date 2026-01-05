@@ -8,6 +8,29 @@
     <link rel="stylesheet" href="../dist/output.css">
     <link rel="stylesheet" href="exam.css">
     <link rel="stylesheet" href="../fontawesome-free-7.1.0-web/css/all.css">
+    <script>
+        if (!localStorage.getItem("currentUserId")) {
+            window.location.replace("../login/login.html");
+        }
+
+        var users = JSON.parse(localStorage.getItem("users")) || [];
+        var currentUserId = Number(localStorage.getItem("currentUserId"));
+
+        var currentUser = null;
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].id === currentUserId) {
+                currentUser = users[i];
+                break;
+            }
+        }
+        if (!currentUser) {
+            window.location.replace("../login/login.html");
+        }
+        if (currentUser.exam.submitted) {
+            window.location.replace("../exam-result/result.html");
+        }
+    </script>
 
 
 </head>
