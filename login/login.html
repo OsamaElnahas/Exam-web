@@ -8,6 +8,31 @@
     <link rel="stylesheet" href="login.css" />
     <link rel="stylesheet" href="../dist/output.css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script>
+        var users = JSON.parse(localStorage.getItem("users")) || [];
+        var currentUserId = Number(localStorage.getItem("currentUserId"));
+
+        var currentUser = null;
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].id === currentUserId) {
+                currentUser = users[i];
+                break;
+            }
+        }
+        if (localStorage.getItem("currentUserId")) {
+            if (localStorage.getItem("remainingSeconds")) {
+                window.location.replace("../exam-page/exam.html")
+            } else if (currentUser.exam.submitted) {
+                window.location.replace("../exam-result/result.html");
+                throw new Error("Redirecting...");
+            } else {
+                window.location.replace("../start-exam/start.html");
+
+
+            }
+        }
+    </script>
 </head>
 
 <body>

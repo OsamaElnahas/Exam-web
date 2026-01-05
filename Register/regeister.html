@@ -1,58 +1,62 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Exam X</title>
     <link rel="stylesheet" href="register.css" />
     <link rel="stylesheet" href="../dist/output.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/daisyui@5"
-      rel="stylesheet"
-      type="text/css"
-    />
-  </head>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script>
+        var users = JSON.parse(localStorage.getItem("users")) || [];
+        var currentUserId = Number(localStorage.getItem("currentUserId"));
 
-  <body>
+        var currentUser = null;
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].id === currentUserId) {
+                currentUser = users[i];
+                break;
+            }
+        }
+        if (localStorage.getItem("currentUserId")) {
+            if (localStorage.getItem("remainingSeconds")) {
+                window.location.replace("../exam-page/exam.html")
+            } else if (currentUser.exam.submitted) {
+                window.location.replace("../exam-result/result.html");
+                throw new Error("Redirecting...");
+            } else {
+                window.location.replace("../start-exam/start.html");
+
+
+            }
+        }
+    </script>
+
+</head>
+
+<body>
     <div class="flex w-100 min-h-screen shadow-lg overflow-hidden">
-      <div
-        class="left-side min-h-screen md-px-5 md-py-8 flex flex-col justify-center items-center w-[100%]"
-      >
-        <div
-          class="relative w-full max-w-md fade-in min-h-screen md:min-h-0 flex items-center justify-center"
-        >
-          <div
-            class="bg-white rounded-2xl shadow-2xl px-8 py-3 min-h-screen flex flex-col justify-center md:min-h-0"
-          >
-            <div class="text-center mb-[30px]">
-              <div
-                class="mb-6 flex justify-center bg-white p-4 shadow-lg w-[75px] h-[75px] items-center rounded-full mx-auto fade-in-out border-2 border-gray-200"
-              >
-                <img
-                  src="../assets//ChatGPT_Image_Dec_19_2025_11_31_23_PM.png "
-                  class="w-[100%]"
-                  alt="ExamWeb Logo "
-                />
-              </div>
-              <h2 class="text-xl font-bold">Create Account</h2>
-            </div>
+        <div class="left-side min-h-screen md-px-5 md-py-8 flex flex-col justify-center items-center w-[100%]">
+            <div class="relative w-full max-w-md fade-in min-h-screen md:min-h-0 flex items-center justify-center">
+                <div class="bg-white rounded-2xl shadow-2xl px-8 py-3 min-h-screen flex flex-col justify-center md:min-h-0">
+                    <div class="text-center mb-[30px]">
+                        <div class="mb-6 flex justify-center bg-white p-4 shadow-lg w-[75px] h-[75px] items-center rounded-full mx-auto fade-in-out border-2 border-gray-200">
+                            <img src="../assets//ChatGPT_Image_Dec_19_2025_11_31_23_PM.png " class="w-[100%]" alt="ExamWeb Logo " />
+                        </div>
+                        <h2 class="text-xl font-bold">Create Account</h2>
+                    </div>
 
-            <form class="text-[var(--third-color)] text-sm" novalidate>
-              <div class="space-y-9 md:space-y-4">
-                <!-- Name Fields -->
-                <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <label class="block font-semibold mb-2">First Name</label>
-                    <div class="relative">
-                      <div
-                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                      >
-                        <svg
-                          class="w-5 h-5"
-                          fill="none "
-                          stroke="currentColor "
-                          viewBox="0 0 24 24 "
-                        >
+                    <form class="text-[var(--third-color)] text-sm" novalidate>
+                        <div class="space-y-9 md:space-y-4">
+                            <!-- Name Fields -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block font-semibold mb-2">First Name</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <svg class="w-5 h-5" fill="none " stroke="currentColor " viewBox="0 0 24 24 ">
                           <path
                             stroke-linecap="round "
                             stroke-linejoin="round "
@@ -60,31 +64,16 @@
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z "
                           ></path>
                         </svg>
-                      </div>
-                      <input
-                        type="text "
-                        placeholder="Osama "
-                        id="fName"
-                        class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg input-focus transition outline-none"
-                      />
-                    </div>
-                    <p
-                      class="error text-[13px] text-red-500"
-                      id="fNameErrMsg"
-                    ></p>
-                  </div>
-                  <div>
-                    <label class="block font-semibold mb-2">Last Name</label>
-                    <div class="relative">
-                      <div
-                        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                      >
-                        <svg
-                          class="w-5 h-5"
-                          fill="none "
-                          stroke="currentColor "
-                          viewBox="0 0 24 24 "
-                        >
+                                        </div>
+                                        <input type="text " placeholder="Osama " id="fName" class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg input-focus transition outline-none" />
+                                    </div>
+                                    <p class="error text-[13px] text-red-500" id="fNameErrMsg"></p>
+                                </div>
+                                <div>
+                                    <label class="block font-semibold mb-2">Last Name</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <svg class="w-5 h-5" fill="none " stroke="currentColor " viewBox="0 0 24 24 ">
                           <path
                             stroke-linecap="round "
                             stroke-linejoin="round "
@@ -92,34 +81,19 @@
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z "
                           ></path>
                         </svg>
-                      </div>
-                      <input
-                        type="text "
-                        placeholder="Youssef"
-                        id="lName"
-                        class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg input-focus transition outline-none"
-                      />
-                    </div>
-                    <p
-                      class="error text-[13px] text-red-500"
-                      id="lNameErrMsg"
-                    ></p>
-                  </div>
-                </div>
+                                        </div>
+                                        <input type="text " placeholder="Youssef" id="lName" class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg input-focus transition outline-none" />
+                                    </div>
+                                    <p class="error text-[13px] text-red-500" id="lNameErrMsg"></p>
+                                </div>
+                            </div>
 
-                <!-- Email Input -->
-                <div class=" ">
-                  <label class="block font-semibold mb-2">Email Address</label>
-                  <div class="relative">
-                    <div
-                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                    >
-                      <svg
-                        class="w-5 h-5"
-                        fill="none "
-                        stroke="currentColor "
-                        viewBox="0 0 24 24 "
-                      >
+                            <!-- Email Input -->
+                            <div class=" ">
+                                <label class="block font-semibold mb-2">Email Address</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="w-5 h-5" fill="none " stroke="currentColor " viewBox="0 0 24 24 ">
                         <path
                           stroke-linecap="round "
                           stroke-linejoin="round "
@@ -127,33 +101,18 @@
                           d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207 "
                         ></path>
                       </svg>
-                    </div>
-                    <input
-                      type="email "
-                      placeholder="your.email@example.com "
-                      id="email"
-                      class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg input-focus transition outline-none"
-                    />
-                  </div>
-                  <p
-                    class="error text-[13px] text-red-500"
-                    id="emailErrMsg"
-                  ></p>
-                </div>
+                                    </div>
+                                    <input type="email " placeholder="your.email@example.com " id="email" class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg input-focus transition outline-none" />
+                                </div>
+                                <p class="error text-[13px] text-red-500" id="emailErrMsg"></p>
+                            </div>
 
-                <!-- Password Input -->
-                <div>
-                  <label class="block font-semibold mb-2">Password</label>
-                  <div class="relative">
-                    <div
-                      class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                    >
-                      <svg
-                        class="w-5 h-5"
-                        fill="none "
-                        stroke="currentColor "
-                        viewBox="0 0 24 24 "
-                      >
+                            <!-- Password Input -->
+                            <div>
+                                <label class="block font-semibold mb-2">Password</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="w-5 h-5" fill="none " stroke="currentColor " viewBox="0 0 24 24 ">
                         <path
                           stroke-linecap="round "
                           stroke-linejoin="round "
@@ -161,25 +120,16 @@
                           d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z "
                         ></path>
                       </svg>
-                    </div>
-                    <input
-                      type="password"
-                      id="password"
-                      placeholder="Create a strong password "
-                      class="w-full pl-10 pr-12 py-3 border-2 border-gray-200 rounded-lg input-focus transition outline-none"
-                    />
-                  </div>
+                                    </div>
+                                    <input type="password" id="password" placeholder="Create a strong password " class="w-full pl-10 pr-12 py-3 border-2 border-gray-200 rounded-lg input-focus transition outline-none" />
+                                </div>
 
-                  <p
-                    class="error text-[13px] text-red-500"
-                    id="passwordErrMsg"
-                  ></p>
-                </div>
+                                <p class="error text-[13px] text-red-500" id="passwordErrMsg"></p>
+                            </div>
 
-                <!-- Confirm Password Input -->
-                <div>
-                  <label class="block font-semibold mb-2"
-                    >Confirm Password</label
+                            <!-- Confirm Password Input -->
+                            <div>
+                                <label class="block font-semibold mb-2">Confirm Password</label
                   >
                   <div class="relative">
                     <div

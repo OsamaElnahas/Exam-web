@@ -37,6 +37,9 @@
         if (currentUser.exam.submitted) {
             window.location.replace("../exam-result/result.html");
         }
+        if (localStorage.getItem("remainingSeconds")) {
+            window.location.replace("../exam-page/exam.html")
+        }
     </script>
 
     <title>Exam X</title>
